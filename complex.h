@@ -10,6 +10,8 @@ public:
     Complex();
     Complex(double r, double i);
     ~Complex();
+    
+    
 };
 
 #endif

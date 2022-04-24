@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <complex>
+#include <SDL2/SDL.h>
 
 #define _USE_MATH_DEFINES
 
@@ -12,11 +14,12 @@ double gauss(double x, double y)
 
 int main(int argc, char const *argv[])
 {
-
-
-
+    
+    std::complex<double>** grid;
     std::ofstream myfile;
+
     myfile.open("data.dat");
+
     for(float i = -1; i < 1; i+=0.01)
     {
         for(float j = -1; j < 1; j+=0.01)
@@ -26,5 +29,6 @@ int main(int argc, char const *argv[])
         myfile << "\n";
     }
     myfile.close();
+
     return 0;
 }
