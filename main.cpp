@@ -2,7 +2,7 @@
 #include <fstream>
 #include <cmath>
 #include <complex>
-#include <SDL2/SDL.h>
+// #include <SDL2/SDL.h>
 #include <vector>
 
 #define _USE_MATH_DEFINES
@@ -55,28 +55,6 @@ int main(int argc, char const *argv[])
 
     x = linspace(-l, l, n);
     y = linspace(-l, l, n);
-
-    // for(int i = 0; i < x.size(); i++)
-    //     std::cout << x[i] << " ";
-    // std::cout << "\n";
-
-
-    
-
-
-    // std::ofstream myfile;
-
-    // myfile.open("data.dat");
-
-    // for(float i = -1; i < 1; i+=0.01)
-    // {
-    //     for(float j = -1; j < 1; j+=0.01)
-    //     {
-    //         myfile << gauss(i, j) << " ";
-    //     }
-    //     myfile << "\n";
-    // }
-    // myfile.close();
 
     return 0;
 }
