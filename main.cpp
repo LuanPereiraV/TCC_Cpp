@@ -56,5 +56,14 @@ int main(int argc, char const *argv[])
     x = linspace(-l, l, n);
     y = linspace(-l, l, n);
 
+    double **u = new double *[n];
+    double **v = new double *[n];
+    for(int i = 0; i < n; i++){
+        u[i] = new double[n]();
+        v[i] = new double[n]();
+    }
+
+    
+
     return 0;
 }
