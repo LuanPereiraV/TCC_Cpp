@@ -2,48 +2,11 @@
 #include <fstream>
 #include <cmath>
 #include <complex>
-// #include <SDL2/SDL.h>
 #include <vector>
 
-#define _USE_MATH_DEFINES
+#include "tools.h"
 
-template <typename T>
-std::vector<double> linspace(T start_in, T end_in, int num_in)
-{
-
-    std::vector<double> linspaced;
-
-    double start = static_cast<double>(start_in);
-    double end = static_cast<double>(end_in);
-    double num = static_cast<double>(num_in);
-
-    if (num == 0)
-    {
-        return linspaced;
-    }
-    if (num == 1)
-    {
-        linspaced.push_back(start);
-        return linspaced;
-    }
-
-    double delta = (end - start) / (num - 1);
-
-    for (int i = 0; i < num - 1; ++i)
-    {
-        linspaced.push_back(start + delta * i);
-    }
-
-    linspaced.push_back(end); 
-
-    return linspaced;
-}
-
-double gauss(double x, double y)
-{
-    double alpha = 0.2;
-    return double((1/(2 * M_PI * pow(alpha, 2))) * exp(-1*((pow(x, 2)/1.0 + pow(y, 2)/1.0))/(2*pow(alpha, 2))));
-}
+// #include <SDL2/SDL.h>
 
 int main(int argc, char const *argv[])
 {
@@ -55,6 +18,8 @@ int main(int argc, char const *argv[])
 
     x = linspace(-l, l, n);
     y = linspace(-l, l, n);
+    // x = linspace(-1, 1, 3);
+    // y = linspace(-1, 1, 3);
 
     double **u = new double *[n];
     double **v = new double *[n];
@@ -63,7 +28,18 @@ int main(int argc, char const *argv[])
         v[i] = new double[n]();
     }
 
-    
+    double*** xxyy;
+
+    xxyy = meshgrid(x, y);
+
+    // for (int i = 0; i < y.size(); i++)
+    // {
+    //     for (int j = 0; j < x.size(); j++)
+    //     {
+    //         std::cout << xxyy[0][i][j] << " ";
+    //     }
+    //     std::cout << "\n";
+    // }
 
     return 0;
 }
