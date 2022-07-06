@@ -67,3 +67,26 @@ double*** meshgrid(std::vector<double> x, std::vector<double> y)
 
     
 }
+
+double max(double* a, int n)
+{
+    if(a == NULL)
+        return 0;
+    double max = a[0];
+    for(int i = 0; i < n; i++)
+        if(a[i] > max)
+            max = a[i];
+    return max;
+}
+
+double max_m(double** a, int n, int m)
+{
+    if(a == NULL)
+        return 0;
+    double max = a[0][0];
+    for(int i = 0; i < n; i++)
+        for(int j = 0; j < m; j++)
+            if(a[i][j] > max)
+                max = a[i][j];
+    return max;
+}

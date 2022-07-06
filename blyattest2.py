@@ -41,6 +41,10 @@ u = sc*u
 v = sc*v
 sc = 0.5/(a**2)
 
+print(sc)
+
+quit()
+
 
 # V =  Barreira potencial:
 V = np.zeros((n, n))
