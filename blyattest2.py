@@ -43,9 +43,6 @@ sc = 0.5/(a**2)
 
 print(sc)
 
-quit()
-
-
 # V =  Barreira potencial:
 V = np.zeros((n, n))
 V[:, n//2:(n//2)+1] = 30
