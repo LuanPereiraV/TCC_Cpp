@@ -82,16 +82,16 @@ double** iterate(int n, double** u, double** v, double** V, double sc, double dt
             grid[i][j] = sqrt(pow(u[i][j], 2) + pow(v[i][j], 2));
         }
     }
-
+    
     return grid;
 }
 
 
 int main(int argc, char const *argv[])
 {
-    int n = 800;
-    double l = n/50;
-    double dt = 0.005;
+    int n = 100;
+    double l = n/10;
+    double dt = 0.0005;
 
     std::vector<double> x;
     std::vector<double> y;
@@ -166,11 +166,14 @@ int main(int argc, char const *argv[])
     V = set_barrier(V, n, n-1, 0, n, n, 30);
     V = set_barrier(V, 0, 0, n-1, n, n, 30);
 
+    double **grid;
 
-    
     auto start = std::chrono::system_clock::now();
 
-    double **grid = iterate(n, u, v, V, sc, dt);
+    for(int i = 0; i < 700; i++)
+    {
+        grid = iterate(n, u, v, V, sc, dt);
+    }
 
     auto end = std::chrono::system_clock::now();
 
