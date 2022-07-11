@@ -54,13 +54,6 @@ double** iterate(int n, double** u, double** v, double** V, double sc, double dt
         for(int j = 0; j < n; j++)
         {
             H[i][j] = H[i][j] + (V[i][j] * u[i][j]);
-        }
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
             v[i][j] = v[i][j] - (H[i][j] * dt);
         }
     }
@@ -78,14 +71,7 @@ double** iterate(int n, double** u, double** v, double** V, double sc, double dt
         for(int j = 0; j < n; j++)
         {
             H[i][j] = H[i][j] + (V[i][j] * v[i][j]);
-        }
-    }
-
-    for (int i = 0; i < n; i++)
-    {
-        for (int j = 0; j < n; j++)
-        {
-            v[i][j] = u[i][j] + (H[i][j] * dt);
+            u[i][j] = u[i][j] + (H[i][j] * dt);
         }
     }
 
