@@ -89,8 +89,8 @@ double** iterate(int n, double** u, double** v, double** V, double sc, double dt
 
 int main(int argc, char const *argv[])
 {
-    int n = 80;
-    double l = n/10;
+    int n = 800;
+    double l = n/50;
     double dt = 0.005;
 
     std::vector<double> x;
