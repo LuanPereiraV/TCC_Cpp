@@ -89,9 +89,9 @@ double** iterate(int n, double** u, double** v, double** V, double sc, double dt
 
 int main(int argc, char const *argv[])
 {
-    int n = 100;
+    int n = 200;
     double l = n/10;
-    double dt = 0.0005;
+    double dt = 0.002;
 
     std::vector<double> x;
     std::vector<double> y;
@@ -114,17 +114,17 @@ int main(int argc, char const *argv[])
     double** xx = xxyy[0];
     double** yy = xxyy[1];
 
-    double kx = 1.0 * (2.0 * M_PI);
-    double ky = 0;
+    double kx = -5.0;
+    double ky = 0.0;
 
-    double disp = 3.0;
+    double disp = 4.0;
 
     for(int i = 0; i < n; i++)
     {
         for(int j = 0; j < n; j++)
         {
-            u[i][j] = cos((kx * xx[i][j]) + (ky * yy[i][j])) * exp(-1.0 / disp * pow(xx[i][j] - floor(l/2.0), 2.0)) * exp(-1.0 / disp * pow(yy[i][j], 2.0));
-            v[i][j] = -1.0*sin((kx * xx[i][j]) + (ky * yy[i][j])) * exp(-1.0 / disp * pow(xx[i][j] - floor(l/2.0), 2.0)) * exp(-1.0 / disp * pow(yy[i][j], 2.0));
+            u[i][j] = cos((kx * xx[i][j]) + (ky * yy[i][j])) * exp(-1.0 / disp * pow(xx[i][j], 2.0)) * exp(-1.0 / disp * pow(yy[i][j], 2.0));
+            v[i][j] = -1.0*sin((kx * xx[i][j]) + (ky * yy[i][j])) * exp(-1.0 / disp * pow(xx[i][j], 2.0)) * exp(-1.0 / disp * pow(yy[i][j], 2.0));
         }
     }
 
@@ -170,7 +170,7 @@ int main(int argc, char const *argv[])
 
     auto start = std::chrono::system_clock::now();
 
-    for(int i = 0; i < 700; i++)
+    for(int i = 0; i < 1; i++)
     {
         grid = iterate(n, u, v, V, sc, dt);
     }
