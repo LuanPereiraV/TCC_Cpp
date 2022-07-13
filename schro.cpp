@@ -158,3 +158,108 @@ void Schro::draw()
     
     fclose(arq);
 }
+
+int Schro::display()
+{
+    // The window we'll be rendering to
+    SDL_Window *window = NULL;
+
+    // The surface contained by the window
+    SDL_Surface *screenSurface = NULL;
+
+    // Initialize SDL
+    if (SDL_Init(SDL_INIT_VIDEO) < 0)
+    {
+        printf("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+    }
+    else
+    {
+        // Create window
+        window = SDL_CreateWindow("SDL Tutorial", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, Schro::n, Schro::n, SDL_WINDOW_SHOWN);
+        if (window == NULL)
+        {
+            printf("Window could not be created! SDL_Error: %s\n", SDL_GetError());
+        }
+        else
+        {
+            // Get window surface
+            screenSurface = SDL_GetWindowSurface(window);
+
+            // Fill the surface white
+            SDL_FillRect(screenSurface, NULL, SDL_MapRGB(screenSurface->format, 0xFF, 0xFF, 0xFF));
+
+            // Update the surface
+            SDL_UpdateWindowSurface(window);
+
+            SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+            if (renderer == NULL)
+            {
+                SDL_Log("Could not create a renderer: %s", SDL_GetError());
+                return -1;
+            }
+
+            SDL_Rect r;
+            r.x = 200;
+            r.y = 200;
+            r.w = 50;
+            r.h = 50;
+
+            while (true)
+            {
+
+                Uint32 start_time, frame_time;
+                float fps;
+                start_time = SDL_GetTicks();
+
+                // Get the next event
+                SDL_Event event;
+                if (SDL_PollEvent(&event))
+                {
+                    if (event.type == SDL_QUIT)
+                    {
+                        // Break out of the loop on quit
+                        break;
+                    }
+                }
+
+                // Set the color to cornflower blue and clear
+                SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                SDL_RenderClear(renderer);
+
+                Schro::iterate();
+
+                for (int i = 0; i < Schro::n; i++)
+                {
+                    for (int j = 0; j < Schro::n; j++)
+                    {
+                        double value = sqrt(pow(Schro::grid[i][j], 2)) * 255;
+                        if(value > 255)
+                            value = 255;
+                        SDL_SetRenderDrawColor(renderer, value, value, value, 255);
+                        SDL_RenderDrawPoint(renderer, i, j);
+                    }
+                }
+
+                // Set render color to blue ( rect will be rendered in this color )
+                SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
+
+                // Render rect
+                SDL_RenderFillRect(renderer, &r);
+
+                // Show the renderer contents
+                SDL_RenderPresent(renderer);
+
+                frame_time = SDL_GetTicks() - start_time;
+                fps = (frame_time > 0) ? 1000.0f / frame_time : 0.0f;
+
+                std::cout << fps << std::endl;
+            }
+        }
+    }
+    // Destroy window
+    SDL_DestroyWindow(window);
+
+    // Quit SDL subsystems
+    SDL_Quit();
+    return 0;
+}

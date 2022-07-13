@@ -9,6 +9,10 @@
 #include <chrono>
 #include <ctime>
 
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_timer.h>
+
 #include "tools.h"
 
 class Schro
@@ -48,6 +52,7 @@ public:
     void iterate();
     void set_barrier(int x1, int y1, int x2, int y2, double value);
     void draw();
+    int display();
 };
 
 #endif // MACRO
