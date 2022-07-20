@@ -12,6 +12,7 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_timer.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "tools.h"
 
@@ -45,12 +46,31 @@ private:
 
     double **grid;
 
+    std::vector<SDL_Rect> barriers;
+    std::vector<int> barriersEnergy;
+
+    // SDL
+    SDL_Window *window;
+    SDL_Surface *gameSurface;
+    SDL_Texture *gameTexture;
+
+    SDL_Surface *menuSurface;
+    std::vector<SDL_Texture*> buttonsTexture;
+
+    int SCREEN_W;
+    int SCREEN_H;
+
+    void set_kxy(int kx, int ky);
+
+    bool init();
+    void restart();
+
 public:
     Schro(int n, int lambda, double dt, double kx, double ky, double disp);
     ~Schro();
 
     void iterate();
-    void set_barrier(int x1, int y1, int x2, int y2, double value);
+    void set_barrier(int x, int y, int w, int h, double value);
     void draw();
     int display();
 };
